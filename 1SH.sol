@@ -1045,6 +1045,11 @@ contract OneSH is ERC20, ERC20Burnable, Pausable, Ownable {
         blacklisted[_user] = _isBlacklisted;
     }
 
+
+    function whitelist(address _user, bool _enable) external onlyOwner {
+        whitelisted[_user] = _enable;
+    }
+
     function setMaxSell(uint256 _maxSell) external onlyOwner {
         maxSell = _maxSell;
         emit SetMaxSell(_maxSell);
@@ -1083,6 +1088,7 @@ contract OneSH is ERC20, ERC20Burnable, Pausable, Ownable {
     }
 
     function rescueStuckToken(address _token, address _to) external onlyOwner {
+        require(_to != address(this),"Invalid receiver");
         uint256 _amount = ERC20(_token).balanceOf(address(this));
         ERC20(_token).transfer(_to, _amount);
     }
