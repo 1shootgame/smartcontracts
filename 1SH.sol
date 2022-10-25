@@ -947,7 +947,6 @@ library SafeMath {
 
 contract OneSH is ERC20, ERC20Burnable, Pausable, Ownable {
     using SafeMath for uint256;
-    uint256 private _minted;
     uint256 private _maxCap = 1000000000 * 10**decimals();
 
     bool public isAntiBot;
@@ -972,11 +971,6 @@ contract OneSH is ERC20, ERC20Burnable, Pausable, Ownable {
 
     constructor() ERC20('1 SHOOT', '1SH') {
         _mint(msg.sender, _maxCap);
-        _minted = _maxCap;
-    }
-
-    function cap() public view virtual returns (uint256) {
-        return _minted;
     }
 
     function pause() public onlyOwner {
