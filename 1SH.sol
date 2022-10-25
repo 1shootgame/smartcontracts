@@ -987,15 +987,6 @@ contract OneSH is ERC20, ERC20Burnable, Pausable, Ownable {
         _unpause();
     }
 
-    function _mint(address account, uint256 amount) internal override {
-        require(_minted + amount <= _maxCap, 'Cap exceeded');
-        super._mint(account, amount);
-    }
-
-    function mint(address to, uint256 amount) public onlyOwner {
-        _mint(to, amount);
-    }
-
     function _beforeTokenTransfer(
         address from,
         address to,
