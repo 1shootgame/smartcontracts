@@ -1088,7 +1088,7 @@ contract OneSH is ERC20, ERC20Burnable, Pausable, Ownable {
     }
 
     function rescueStuckToken(address _token, address _to) external onlyOwner {
-        require(_to != address(this),"Invalid receiver");
+        require(_token != address(this),"Invalid token");
         uint256 _amount = ERC20(_token).balanceOf(address(this));
         ERC20(_token).transfer(_to, _amount);
     }
